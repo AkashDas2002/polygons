@@ -82,28 +82,28 @@ def add_sphere(polygons, cx, cy, cz, r, steps ):
     longt_start = 0
     longt_stop = steps
 
-    steps+= 1
-    for lat in range(lat_start, lat_stop - 1):
-        for longt in range(longt_start, longt_stop):
-            index = lat * steps + longt
+    steps += 1
+    index = 0
+    while index < len(points) - 1:
+        add_polygon(polygons,
+        int(points[index][0]), int(points[index][1]), int(points[index][2]),
+        int(points[index + 1][0]), int(points[index + 1][1]), int(points[index + 1][2]),
+        int(points[(index + 1+steps) % len(points)][0]), int(points[(index + 1+steps) % len(points)][1]), int(points[(index + 1+steps)  % len(points)][2])
+        )
 
+        if index % steps != 0 and index % steps != steps - 1:
             add_polygon(polygons,
             int(points[index][0]), int(points[index][1]), int(points[index][2]),
-            int(points[index + 1][0]), int(points[index + 1][1]), int(points[index + 1][2]),
-            int(points[index + 1+steps][0]), int(points[index + 1+steps][1]), int(points[index + 1+steps][2])
+            int(points[(index + 1 + steps) % len(points)][0]), int(points[(index + 1 + steps)  % len(points)][1]), int(points[(index + 1 + steps)  % len(points)][2]),
+            int(points[(index + steps) % len(points)][0]), int(points[(index + steps) % len(points)][1]), int(points[(index + steps) % len(points)][2])
             )
-
-            add_polygon(polygons,
-            int(points[index][0]), int(points[index][1]), int(points[index][2]),
-            int(points[index + 1 + steps][0]), int(points[index + 1 + steps][1]), int(points[index + 1 + steps][2]),
-            int(points[index + steps][0]), int(points[index + steps][1]), int(points[index + steps][2])
-            )
-            # add_edge(polygons, points[index][0],
-            #          points[index][1],
-            #          points[index][2],
-            #          points[index][0]+1,
-            #          points[index][1]+1,
-            #          points[index][2]+1 )
+        index += 1
+        # add_edge(polygons, points[index][0],
+        #          points[index][1],
+        #          points[index][2],
+        #          points[index][0]+1,
+        #          points[index][1]+1,
+        #          points[index][2]+1 )
 
 def generate_sphere( cx, cy, cz, r, steps ):
     points = []
@@ -134,16 +134,21 @@ def add_torus(polygons, cx, cy, cz, r0, r1, steps ):
     longt_start = 0
     longt_stop = steps
 
-    for lat in range(lat_start, lat_stop):
-        for longt in range(longt_start, longt_stop):
-            index = lat * steps + longt
+    index = 0
+    while index < len(points) - 1:
+        add_polygon(polygons,
+        int(points[index][0]), int(points[index][1]), int(points[index][2]),
+        int(points[index + 1][0]), int(points[index + 1][1]), int(points[index + 1][2]),
+        int(points[(index + 1+steps) % len(points)][0]), int(points[(index + 1+steps) % len(points)][1]), int(points[(index + 1+steps)  % len(points)][2])
+        )
 
-            add_edge(polygons, points[index][0],
-                     points[index][1],
-                     points[index][2],
-                     points[index][0]+1,
-                     points[index][1]+1,
-                     points[index][2]+1 )
+        if index % steps != 0 and index % steps != steps - 1:
+            add_polygon(polygons,
+            int(points[index][0]), int(points[index][1]), int(points[index][2]),
+            int(points[(index + 1 + steps) % len(points)][0]), int(points[(index + 1 + steps)  % len(points)][1]), int(points[(index + 1 + steps)  % len(points)][2]),
+            int(points[(index + steps) % len(points)][0]), int(points[(index + steps) % len(points)][1]), int(points[(index + steps) % len(points)][2])
+            )
+        index += 1
 
 def generate_torus( cx, cy, cz, r0, r1, steps ):
     points = []
