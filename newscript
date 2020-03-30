@@ -1,0 +1,35 @@
+ident
+box
+0 10 0 10 10 10
+box
+0 20 0 10 10 10
+box
+0 30 0 10 10 10
+box
+0 40 0 10 10 10
+box
+0 50 0 10 10 10
+box
+0 60 0 10 10 10
+box
+0 70 0 10 10 10
+box
+0 80 0 10 10 10
+box
+0 90 0 10 10 10
+torus
+40 60 0 5 25
+sphere
+40 40 0 20
+scale
+5 5 5
+rotate
+x 30
+rotate
+y 20
+move
+40 5 0
+apply
+display
+save
+pic.png
